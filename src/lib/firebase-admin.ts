@@ -9,7 +9,7 @@ if (!getApps().length) {
 
   if (serviceAccountKey) {
     try {
-      const serviceAccount = JSON.parse(serviceAccountKey) as ServiceAccount;
+      const serviceAccount = JSON.parse(serviceAccountKey);
       
       // Fix for private_key escaping in environment variables
       if (serviceAccount.private_key) {
