@@ -7,6 +7,8 @@ type PdfViewerProps = {
   pdfUrl: string;
 };
 
+export default function PdfViewer({ pdfUrl }: PdfViewerProps) {
+  const [isLoading, setIsLoading] = useState(true);
   const googleViewerUrl = `https://docs.google.com/viewer?url=${encodeURIComponent(pdfUrl)}&embedded=true`;
 
   return (
