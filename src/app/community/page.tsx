@@ -41,7 +41,8 @@ export default function CommunityPage() {
     
     setIsSubmitting(true);
     try {
-      await addDoc(collection(db, "experiences"), {
+      console.log("Intentando guardar testimonio en Firestore...");
+      const docRef = await addDoc(collection(db, "experiences"), {
         name: user.displayName || user.email?.split('@')[0] || "Hermano en Cristo",
         rating: formData.rating,
         comment: formData.comment,
@@ -49,11 +50,18 @@ export default function CommunityPage() {
         userId: user.uid,
         date: serverTimestamp()
       });
+      console.log("Documento guardado con ID:", docRef.id);
       setFormData({ rating: 5, comment: '', recommendation: '' });
       alert("¡Gracias por tu testimonio!");
-    } catch (error) {
-      console.error("Error al guardar:", error);
-      alert("Hubo un error al enviar tu comentario. Inténtalo de nuevo.");
+    } catch (error: any) {
+      console.error("Error completo de Firestore:", error);
+      let msg = "Hubo un error al enviar tu comentario.";
+      if (error.code === 'permission-denied') {
+        msg = "Error de Permisos: Debes habilitar las reglas de escritura en tu Consola de Firebase -> Firestore -> Rules.";
+      } else if (error.code === 'not-found') {
+        msg = "Error: La base de datos Firestore no ha sido creada en tu consola de Firebase.";
+      }
+      alert(msg + " (Detalle: " + error.message + ")");
     } finally {
       setIsSubmitting(false);
     }
