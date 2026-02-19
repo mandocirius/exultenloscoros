@@ -20,19 +20,19 @@ export default function PdfViewer({ pdfUrl }: PdfViewerProps) {
         </div>
       )}
       
-      {/* Intentar cargar el PDF directamente, pero usar Google Viewer en móviles o navegadores sin soporte nativo */}
+      {/* Intentar cargar el PDF directamente, pero usar Google Viewer en móviles/tablets o navegadores sin soporte nativo */}
       <iframe
         src={`${pdfUrl}#view=Fit&toolbar=1&navpanes=0`}
-        className={`hidden md:block w-full h-full border-none shadow-2xl ${isLoading ? 'opacity-0' : 'opacity-100 transition-opacity duration-300'}`}
+        className={`hidden xl:block w-full h-full border-none shadow-2xl ${isLoading ? 'opacity-0' : 'opacity-100 transition-opacity duration-300'}`}
         title="Visor de PDF Escritorio"
         onLoad={() => setIsLoading(false)}
       />
 
-      {/* Visor específico para móviles para evitar el botón "Open" */}
+      {/* Visor específico para móviles y tablets para evitar el botón "Open" */}
       <iframe
         src={googleViewerUrl}
-        className={`md:hidden w-full h-full border-none ${isLoading ? 'opacity-0' : 'opacity-100'}`}
-        title="Visor de PDF Móvil"
+        className={`xl:hidden w-full h-full border-none ${isLoading ? 'opacity-0' : 'opacity-100'}`}
+        title="Visor de PDF Móvil y Tablet"
         onLoad={() => setIsLoading(false)}
       />
     </div>
