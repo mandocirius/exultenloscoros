@@ -37,7 +37,11 @@ export default function LoginPage() {
       await signInWithPopup(auth, provider);
       router.push('/'); // Redirigir a home tras el éxito
     } catch (err: any) {
-      setError("Error al iniciar sesión con Google.");
+      if (err.code === 'auth/unauthorized-domain') {
+        setError("Este dominio (exultelaasamblea.com) no está autorizado en Firebase. Por favor, añádelo en la consola de Firebase.");
+      } else {
+        setError("Error al iniciar sesión con Google: " + (err.message || "Error desconocido"));
+      }
       console.error(err);
     }
   };

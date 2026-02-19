@@ -70,16 +70,16 @@ function HeaderContent() {
           )}
         </div>
 
-        {/* Mensaje de Apoyo Integrado (Solo cuando NO estamos en el visor para ahorrar espacio) */}
+        {/* Mensaje de Apoyo Integrado (Visible en todos los dispositivos) */}
         {!viewingSongTitle && (
           <Link 
             href="/support" 
-            className="hidden lg:flex flex-grow max-w-md bg-green-50 hover:bg-green-100 border border-green-200 rounded-xl px-4 py-1.5 items-center justify-center gap-3 transition-colors group"
+            className="flex flex-grow max-w-[280px] md:max-w-md bg-green-50 hover:bg-green-100 border border-green-200 rounded-xl px-3 py-1.5 items-center justify-center gap-2 transition-colors group mx-auto md:mx-0"
           >
-            <span className="text-lg">🙏</span>
-            <p className="text-xs text-green-800 text-center leading-tight">
-              Apoya con <span className="font-bold text-green-600">$0.50 mensual</span> para llegar a más hermanos.
-              <span className="ml-2 font-bold underline group-hover:text-green-900">¡Donar aquí!</span>
+            <span className="text-base">🙏</span>
+            <p className="text-[10px] md:text-xs text-green-800 text-center leading-tight">
+              Apoya con <span className="font-bold text-green-600">$0.50 mensual</span>.
+              <span className="ml-1 font-bold underline group-hover:text-green-900">¡Donar!</span>
             </p>
           </Link>
         )}
